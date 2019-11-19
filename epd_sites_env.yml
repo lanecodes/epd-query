@@ -1,0 +1,13 @@
+name: epd_sites
+channels:
+  - conda-forge
+dependencies:
+  - python==3.7
+  - pandas
+  - numpy
+  - sqlalchemy
+  - psycopg2
+  - jupyterlab  # dev only
+  - scipy       # dev only
+  - requests    # dev only
+  - mypy        # dev only

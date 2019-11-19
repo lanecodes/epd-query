@@ -1,0 +1,4 @@
+pg_dump: notebooks/data/dumpall_epd_db.sql.gz/dumpall_epd_db.sql.gz
+queries:
+  - site_loc_info
+  - site_pollen_abundance

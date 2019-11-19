@@ -1,0 +1,19 @@
+version: "3"
+# https://blog.codeship.com/using-docker-compose-for-python-development/
+services:
+  app:
+    build: .
+    command: python run.py config.yml
+    depends_on:
+      - postgres
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgres://epdapp@postgres/epd
+  postgres:
+    image: postgres:9.6.2-alpine
+    environment:
+      POSTGRES_USER: epdapp
+      POSTGRES_DB: epd
