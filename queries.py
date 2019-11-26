@@ -16,7 +16,7 @@ from pathlib import Path
 import sys
 from typing import Iterable
 
-from sqlalchemy import create_engine, exc, select, Table, MetaData, and_
+from sqlalchemy import exc, select, Table, MetaData, and_
 from sqlalchemy.engine.base import Engine
 from sqlalchemy.sql.selectable import Select
 
@@ -41,7 +41,7 @@ def _check_EPD_con(con: Engine) -> None:
     except exc.SQLAlchemyError as e:
         logging.error('Could not connect to the EPD with the supplied engine.')
         raise exc.SQLAlchemyError(e)
-    logging.info('Test query successfully run against EPD.Sophia Di Martino')
+    logging.info('Test query successfully run against EPD.')
 
 
 def site_loc_info(con: Engine, sites: SiteList) -> pd.DataFrame:
@@ -148,30 +148,3 @@ def _pollen_abundance_select(at: AbundanceTables, sites: SiteList) -> Select:
         .where(and_(at.entity.c.site_.in_(sites),
                     at.chron.c.defaultchron == 'Y'))
     )
-
-
-if __name__ == '__main__':
-    epd_engine = create_engine(
-        'postgresql://andrew:password@localhost:5432/epd95'
-    )
-
-    site_dict = {
-        # original selection presented in checkpoint report
-        'Sanabria Marsh' : 44,
-        'Albufera Alcudia' : 759,
-        'Laguna Guallar' : 761,
-        'San Rafael' : 486,
-        'Navarrés' : 396,
-        'Monte Areo mire' : 1252,
-        # additional sites Carrion2010 called outstanding
-        # examples of sites with anthropogenic disturbance             
-        'Atxuri' : 76, # neolithic
-        'Puerto de Los Tornos' : 560, # neolithic
-        'Charco da Candieira' : 762, # neolithic
-        'Bajondillo' : 1260, # neolithic
-        'Algendar' : 55 # Bronze age, Minorca
-    }
-
-    _check_EPD_con(epd_engine)
-    site_loc_info(epd_engine, site_dict.values()).to_csv('site_loc_info.csv')
-    site_pollen_abundance(epd_engine, site_dict.values()).to_csv('pol_abundance.csv')
