@@ -1,11 +1,10 @@
-FROM python:3.7-alpine
+FROM python:3.7-slim-buster
 
-RUN apk update \
-  && apk add \
-    build-base \
+RUN apt-get update -y\
+  && apt-get install \
     postgresql \
-    postgresql-dev \
-    libpq
+    postgresql-client \
+    -y
 
 RUN mkdir /usr/src/app
 WORKDIR /usr/src/app

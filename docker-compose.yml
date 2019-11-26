@@ -3,7 +3,7 @@ version: "3"
 services:
   app:
     build: .
-    command: python run.py config.yml
+    command: bash
     depends_on:
       - postgres
     volumes:
@@ -11,9 +11,17 @@ services:
     ports:
       - "8000:8000"
     environment:
-      DATABASE_URL: postgres://epdapp@postgres/epd
+      DATABASE_URL: postgres://postgres@postgres/postgres
+
   postgres:
-    image: postgres:9.6.2-alpine
+    image: postgres:12.1-alpine
     environment:
-      POSTGRES_USER: epdapp
-      POSTGRES_DB: epd
+      POSTGRES_USER: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5442:5432"
+
+volumes:
+  db-data:
+    driver: local
