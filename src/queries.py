@@ -44,7 +44,7 @@ def _check_EPD_con(con: Engine) -> None:
     logging.info('Test query successfully run against EPD.')
 
 
-def site_loc_info(con: Engine, sites: SiteList) -> pd.DataFrame:
+def site_location_info(con: Engine, sites: SiteList) -> pd.DataFrame:
     """Return DataFrame providing location information for study sites.
     
     Parameters
@@ -74,7 +74,7 @@ def site_loc_info(con: Engine, sites: SiteList) -> pd.DataFrame:
     return pd.read_sql_query(sites_select, con=con).set_index('sitename')
 
 
-def site_pollen_abundance(con: Engine, sites: SiteList) -> pd.DataFrame:
+def site_pollen_abundance_ts(con: Engine, sites: SiteList) -> pd.DataFrame:
     """Return DataFrame of pollen abundance time series for study sites.
     
     Parameters
