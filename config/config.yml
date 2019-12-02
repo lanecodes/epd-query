@@ -5,13 +5,5 @@ queries:
 sites:
   - name: Sanabria Marsh
     epd_number: 44
-  - name: Albufera Alcudia
-    epd_number: 759
-  - name: Laguna Guallar
-    epd_number: 761
-  - name: San Rafael
-    epd_number: 486
   - name: Navarrés
     epd_number: 396
-  - name: Monte Areo mire
-    epd_number: 1252
