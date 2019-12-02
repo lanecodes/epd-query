@@ -17,9 +17,13 @@ import queries
 from queries import SiteList
 
 logging.basicConfig(
+    filename='logs/epd_extract.log',
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
+
+DB_HOSTNAME = 'db'
+DB_PORT = 5432  # Container port for the Postgres container's database.
 
 
 @dataclass
@@ -80,8 +84,8 @@ def _get_query_data(query_func: Callable[[Engine, SiteList], pd.DataFrame],
 
 if __name__ == '__main__':
     args = _get_command_line_args()
-    config = _read_config_file('config.yml')
-    db = PGDatabaseCreds('localhost', 5442, 'postgres', 'postgres')
+    config = _read_config_file('config/config.yml')
+    db = PGDatabaseCreds(DB_HOSTNAME, DB_PORT, 'postgres', 'postgres')
 
     if args.restore_epd:
         logging.info('Creating epd and wwwadm database users...')

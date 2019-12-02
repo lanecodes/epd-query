@@ -3,17 +3,17 @@ version: "3"
 services:
   app:
     build: .
-    command: bash
+    command: python src/run.py --restore-epd
     depends_on:
-      - postgres
+      - db
     volumes:
-      - .:/usr/src/app
-    ports:
-      - "8000:8000"
-    environment:
-      DATABASE_URL: postgres://postgres@postgres/postgres
+      - ./data:/usr/src/app/data
+      - ./outputs:/usr/src/app/outputs
+      - ./logs:/usr/src/app/logs
+      - ./config:/usr/src/app/config
+      - ./src:/usr/src/app/src
 
-  postgres:
+  db:
     image: postgres:12.1-alpine
     environment:
       POSTGRES_USER: postgres

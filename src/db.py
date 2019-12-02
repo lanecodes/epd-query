@@ -9,7 +9,7 @@ from dataclasses import dataclass
 import gzip
 import logging
 from pathlib import Path
-from subprocess import CompletedProcess, run
+from subprocess import CalledProcessError, CompletedProcess, run
 import shlex
 import tempfile
 
@@ -103,7 +103,17 @@ def restore_sql_dump(file: str, db_creds: PGDatabaseCreds) -> CompletedProcess:
     -------
     CompletedProcess
     """
-    return run(shlex.split(
-        f'psql -h {db_creds.host} -p {db_creds.port} -d {db_creds.database} '
-        f'-U {db_creds.user} -f {file}'
-    ), check=True, capture_output=True, text=True)
+    try:
+        result = run(shlex.split(
+            f'psql -h {db_creds.host} -p {db_creds.port} '
+            f'-d {db_creds.database} -U {db_creds.user} -f {file}'
+        ), check=True, capture_output=True, text=True)
+
+    except CalledProcessError:
+        logging.error(
+            f'Could not access database at {db_creds.host}:{db_creds.port}. '
+            'Check connection details.'
+        )
+        raise
+
+    return result

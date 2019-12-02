@@ -1,5 +1,20 @@
+# Python fluff
 .mypy_cache/
-.vscode/
-*/.ipynb_checkpoints/*
 __pycache__/
-epd_restore.log
+
+# Editor fluff
+.vscode/
+
+# html of README.md
+README.html
+
+# Jupyter notebooks and checkpoints
+notebooks/
+*/.ipynb_checkpoints/*
+
+# Log files
+logs/
+
+# Generated data
+outputs/
+

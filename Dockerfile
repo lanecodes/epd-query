@@ -1,16 +1,14 @@
 FROM python:3.7-slim-buster
 
-RUN apt-get update -y\
-  && apt-get install \
-    postgresql \
-    postgresql-client \
-    -y
+RUN apt-get update && apt-get install -y \
+  postgresql \
+  postgresql-client
 
-RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
 COPY ./requirements.txt .
+
 RUN pip install -r requirements.txt
 
 ENV PYTHONUNBUFFERED 1
 
-COPY . .
+CMD ["bash"]
