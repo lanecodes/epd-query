@@ -1,4 +1,5 @@
 # EPDquery
+[![DOI](https://zenodo.org/badge/225420303.svg)](https://zenodo.org/badge/latestdoi/225420303)
 
 The European Pollen Database ([EPD](http://europeanpollendatabase.net)) is a
 valuable source of data accumulated throughout the last century by thousands of
@@ -175,6 +176,12 @@ We use [semantic versioning][SemVer].
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file
 for details.
+
+## How to cite
+
+Please visit the [Zenodo page](https://doi.org/10.5281/zenodo.3560683) for this
+project to generate and export bibliographic information in the citation style
+of your choice.
 
 ## Acknowledgements
 
