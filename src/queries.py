@@ -148,3 +148,17 @@ def _pollen_abundance_select(at: AbundanceTables, sites: SiteList) -> Select:
         .where(and_(at.entity.c.site_.in_(sites),
                     at.chron.c.defaultchron == 'Y'))
     )
+
+
+def pollen_groups(con: Engine, sites: SiteList) -> pd.DataFrame:
+    """Mapping from var_ to species group according to the EPD."""
+    p_group = Table('p_group', MetaData(), autoload_with=con)
+    groups = Table('groups', MetaData(), autoload_with=con)
+    groups_select = (
+        select([p_group.c.var_, p_group.c.groupid, groups.c.groupname])
+        .select_from(
+            p_group
+            .join(groups, p_group.c.groupid == groups.c.groupid)
+        )
+    )
+    return pd.read_sql_query(groups_select, con=con).set_index('var_')

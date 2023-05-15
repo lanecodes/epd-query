@@ -1,9 +1,22 @@
+# config.yml
 queries:
   - site_location_info
   - site_pollen_abundance_ts
+  - pollen_groups
 
 sites:
-  - name: Sanabria Marsh
-    epd_number: 44
+  - name: Charco da Candieira
+    epd_number: 762
+    settlement_period: Neolithic
+  - name: San Rafael
+    epd_number: 486
+  - name: Atxuri
+    epd_number : 76
+    settlement_period: Neolithic
+  - name: Monte Areo mire
+    epd_number: 1252
   - name: Navarrés
     epd_number: 396
+  - name: Algendar
+    epd_number: 55
+    settlement_period: Bronze age
